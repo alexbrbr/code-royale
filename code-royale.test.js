@@ -1,5 +1,15 @@
 const lib = require('./code-royale');
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(lib.sum(1, 2)).toBe(3);
+test('should find my queen amongst units', () => {
+  const units = [{
+    owner: 1,
+    unitType: -1
+  }, {
+    owner: 0,
+    unitType: -1
+  }];
+  expect(lib.findMyQueen(units)).toEqual({
+    owner: 0,
+    unitType: -1
+  });
 });
