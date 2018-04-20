@@ -1,0 +1,17 @@
+{
+  "name": "code-royale",
+  "version": "1.0.0",
+  "description": "Codingame challenge",
+  "main": "code-royale.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint *.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^22.4.3",
+    "eslint": "^3.19.0",
+    "eslint-config-sparkle": "0.0.1"
+  }
+}
