@@ -55,6 +55,7 @@ try {
     // To debug: printErr('Debug messages...');
 
     printErr('Queen', JSON.stringify(findMyQueen(units)));
+    printErr('MySites', JSON.stringify(findMySites(sites)));
     // First line: A valid queen action
     // Second line: A set of training instructions
     print('WAIT');
@@ -63,11 +64,23 @@ try {
 } catch (e) {
   // console.log(e);
   module.exports = {
-    findMyQueen
+    findMyQueen,
+    findMySites,
+    findEmptySites
   };
 }
 
 function findMyQueen(units) {
   return units
     .find(u => u.owner === 0 && u.unitType === -1);
+}
+
+function findMySites(sites) {
+  return sites
+    .filter(u => u.owner === 0);
+}
+
+function findEmptySites(sites) {
+  return sites
+    .filter(u => u.owner === -1);
 }

@@ -13,3 +13,31 @@ test('should find my queen amongst units', () => {
     unitType: -1
   });
 });
+
+test('should find my site amongst sites', () => {
+  const sites = [{
+    owner: 1,
+    structureType: 2
+  }, {
+    owner: 0,
+    structureType: 2
+  }];
+  expect(lib.findMySites(sites)).toEqual([{
+    owner: 0,
+    structureType: 2
+  }]);
+});
+
+test('should find empty site amongst sites', () => {
+  const sites = [{
+    owner: -1,
+    structureType: 2
+  }, {
+    owner: 0,
+    structureType: 2
+  }];
+  expect(lib.findEmptySites(sites)).toEqual([{
+    owner: -1,
+    structureType: 2
+  }]);
+});
