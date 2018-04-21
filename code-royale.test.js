@@ -41,3 +41,10 @@ test('should find empty site amongst sites', () => {
     structureType: 2
   }]);
 });
+
+
+test('should compute distance between 2 points', () => {
+  const A = {x: -7, y: -2};
+  const B = {x: 5, y: 3};
+  expect(lib.distanceBetween(A, B)).toBe(13);
+});

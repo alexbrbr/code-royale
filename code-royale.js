@@ -66,7 +66,8 @@ try {
   module.exports = {
     findMyQueen,
     findMySites,
-    findEmptySites
+    findEmptySites,
+    distanceBetween
   };
 }
 
@@ -83,4 +84,8 @@ function findMySites(sites) {
 function findEmptySites(sites) {
   return sites
     .filter(u => u.owner === -1);
+}
+
+function distanceBetween(A, B) {
+  return Math.sqrt((B.x - A.x) * (B.x - A.x) + (B.y - A.y) * (B.y - A.y));
 }
