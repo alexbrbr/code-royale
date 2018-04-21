@@ -67,7 +67,8 @@ try {
     findMyQueen,
     findMySites,
     findEmptySites,
-    distanceBetween
+    distanceBetween,
+    findClosestEmptySite
   };
 }
 
@@ -88,4 +89,15 @@ function findEmptySites(sites) {
 
 function distanceBetween(A, B) {
   return Math.sqrt((B.x - A.x) * (B.x - A.x) + (B.y - A.y) * (B.y - A.y));
+}
+
+function findClosestEmptySite(myQueen, emptySites) {
+  const distanceFromEmptySites = emptySites.map(s => ({
+    distanceFromQueen: distanceBetween(myQueen, s),
+    siteId: s.siteId
+  }));
+
+  const closestEmptySite = distanceFromEmptySites.sort((a, b) => a.distanceFromQueen - b.distanceFromQueen)[0];
+
+  return emptySites.find(s => s.siteId === closestEmptySite.siteId);
 }
