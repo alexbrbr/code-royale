@@ -5,6 +5,7 @@
   "main": "code-royale.js",
   "scripts": {
     "test": "jest",
+    "test-watch": "jest --watch",
     "lint": "eslint *.js"
   },
   "author": "",
