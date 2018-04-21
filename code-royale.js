@@ -1,11 +1,18 @@
 try {
   const numSites = parseInt(readline(), 10);
+  const sitePositions = [];
   for (let i = 0; i < numSites; i += 1) {
     const inputs = readline().split(' ');
     const siteId = parseInt(inputs[0], 10);
     const x = parseInt(inputs[1], 10);
     const y = parseInt(inputs[2], 10);
     const radius = parseInt(inputs[3], 10);
+    sitePositions.push({
+      siteId,
+      x,
+      y,
+      radius
+    });
   }
 
   // game loop
@@ -50,19 +57,28 @@ try {
         health
       });
     }
+    const myQueen = findMyQueen(units);
+    const emptySites = findEmptySites(
+      sites.map(s =>
+        Object.assign(s, sitePositions.find(sP => sP.siteId === s.siteId))
+      )
+    );
+    const mySites = findMySites(sites);
 
-    // Write an action using print()
-    // To debug: printErr('Debug messages...');
+    const closestEmptySite = findClosestEmptySite(myQueen, emptySites);
+    if (touchedSite === -1 || mySites.find(s => s.siteId === touchedSite)) {
+      print(`MOVE ${closestEmptySite.x} ${closestEmptySite.y}`);
+    } else {
+      print(`BUILD ${touchedSite} BARRACKS-KNIGHT`);
+    }
+    const siteIdList = mySites.length > 0 ?
+      ` ${mySites.map(s => s.siteId).pop()}` :
+      '';
 
-    printErr('Queen', JSON.stringify(findMyQueen(units)));
-    printErr('MySites', JSON.stringify(findMySites(sites)));
-    // First line: A valid queen action
-    // Second line: A set of training instructions
-    print('WAIT');
-    print('TRAIN');
+    print(`TRAIN${siteIdList}`);
   }
 } catch (e) {
-  // console.log(e);
+  console.log(e);
   module.exports = {
     findMyQueen,
     findMySites,
