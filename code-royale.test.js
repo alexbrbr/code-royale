@@ -55,3 +55,8 @@ test('findClosestEmptySite - should find closest empty site from my queen', () =
 
   expect(lib.findClosestEmptySite(myQueen, [A, B])).toEqual(B);
 });
+
+test('decideWhichBuildingToBuild - should build BARRACKS-KNIGHT when none exist', () => {
+  const sites = [];
+  expect(lib.decideWhichBuildingToBuild(sites)).toBe('BARRACKS-KNIGHT');
+});

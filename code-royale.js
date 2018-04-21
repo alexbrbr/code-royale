@@ -68,8 +68,12 @@ try {
     const closestEmptySite = findClosestEmptySite(myQueen, emptySites);
     if (touchedSite === -1 || mySites.find(s => s.siteId === touchedSite)) {
       print(`MOVE ${closestEmptySite.x} ${closestEmptySite.y}`);
+    } else if (closestEmptySite) {
+      const building = decideWhichBuildingToBuild(sites);
+      print(`BUILD ${touchedSite} ${building}`);
     } else {
-      print(`BUILD ${touchedSite} BARRACKS-KNIGHT`);
+      // escape when all spots are built
+      print(`MOVE ${mySites[0].x} ${mySites[0].y}`);
     }
     const siteIdList = mySites.length > 0 ?
       ` ${mySites.map(s => s.siteId).pop()}` :
@@ -78,13 +82,13 @@ try {
     print(`TRAIN${siteIdList}`);
   }
 } catch (e) {
-  console.log(e);
   module.exports = {
     findMyQueen,
     findMySites,
     findEmptySites,
     distanceBetween,
-    findClosestEmptySite
+    findClosestEmptySite,
+    decideWhichBuildingToBuild
   };
 }
 
@@ -116,4 +120,15 @@ function findClosestEmptySite(myQueen, emptySites) {
   const closestEmptySite = distanceFromEmptySites.sort((a, b) => a.distanceFromQueen - b.distanceFromQueen)[0];
 
   return emptySites.find(s => s.siteId === closestEmptySite.siteId);
+}
+
+function decideWhichBuildingToBuild(sites) {
+  const mySites = findMySites(sites);
+  const hasKnight = mySites.some(s => s.param2 === 0);
+  const hasArcher = mySites.some(s => s.param2 === 1);
+  const hasGiant = mySites.some(s => s.param2 === 2);
+  return hasGiant ? 'TOWER' :
+    hasArcher ? 'BARRACKS-GIANT' :
+    hasKnight ? 'BARRACKS-ARCHER' :
+    'BARRACKS-KNIGHT';
 }

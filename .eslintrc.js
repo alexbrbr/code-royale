@@ -10,6 +10,7 @@ module.exports = {
     "expect": true
    },
    rules: {
-     "no-unused-vars": [1]
+     "no-unused-vars": [1],
+     "no-nested-ternary": [0],
    }
 };
